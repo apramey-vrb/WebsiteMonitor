@@ -1,0 +1,8 @@
+threshold: 5
+urls:
+- "link": https://apra.me
+  "content": "Apramey Bhat"
+- "link": https://amazon.com
+  "content": "I'm Feeling Lucky"
+- "link": https://google.com
+  "content": "I'm Feeling Lucky"

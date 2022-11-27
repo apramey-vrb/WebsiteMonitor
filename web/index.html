@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Monitor last status result</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script type="text/javascript" src="/eel.js"></script> 
+</head>
+<body>
+    <h1> Monitor Results </h1>
+    <span id="error"></span>
+    <table class="table">
+
+    </table>
+</body>
+<script>
+
+    eel.get_recent_status()((payloads) => {
+
+        if(payloads && !(payloads.length > 0)){
+            document.getElementById('error').innerHTML = 'Please run the monitor to visualise the results'
+        }else if (payloads.length > 0) {
+            function generateTableHead(table, data) {
+                let thead = table.createTHead();
+                let row = thead.insertRow();
+                for (let key of data) {
+                    let th = document.createElement("th");
+                    let text = document.createTextNode(key);
+                    th.appendChild(text);
+                    row.appendChild(th);
+                }
+            }
+
+            function generateTable(table, data) {
+                for (let element of data) {
+                    let row = table.insertRow();
+                    for (key in element) {
+                    let cell = row.insertCell();
+                    let text = document.createTextNode(element[key]);
+                    cell.appendChild(text);
+                    }
+                }
+            }
+
+            let table = document.querySelector("table");
+            let data = Object.keys(payloads[0]);
+            generateTableHead(table, data);
+            generateTable(table, payloads);
+        }
+
+    })
+    
+
+
+</script>
+
+</html>
